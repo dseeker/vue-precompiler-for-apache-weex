@@ -46,7 +46,10 @@ exports.processImage = function (
         name: 'data-img-src',
         value
       })
-      if (this.config.disableLazy) el.styleBinding = "{ backgroundImage: 'url('+"+value+"+')'}"
+       if (this.config.disablelazy) {
+        if (el.styleBinding && !el.styleBinding.indexOf('backgroundImage')) el.styleBinding.replace(/}/, ", backgroundImage: 'url('+"+value+"+')'}")
+        else el.styleBinding = "{ backgroundImage: 'url('+"+value+"+')'}"
+      }
     }
   }
   const finalClass = staticClass + ' weex-el weex-image'
